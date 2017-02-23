@@ -1,0 +1,3 @@
+%{"decimal": {:hex, :decimal, "1.1.2", "79a769d4657b2d537b51ef3c02d29ab7141d2b486b516c109642d453ee08e00c", [:mix], []},
+  "esqlite": {:hex, :esqlite, "0.2.2", "e4e8b39062a075e0bd4756b894dd2aa8edbf94c9081c1fb5c72dc705bf2f2d88", [:make, :rebar], []},
+  "sqlitex": {:hex, :sqlitex, "1.2.0", "f789ae1918272cdc3bd75061fcb39c7a34ef5b2dc94e19e1f1037c13181c5662", [:mix], [{:decimal, "~> 1.1.0", [hex: :decimal, optional: false]}, {:esqlite, "~> 0.2.0", [hex: :esqlite, optional: false]}]}}
