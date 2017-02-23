@@ -8,7 +8,7 @@ defmodule FastShoppingList do
   require Logger
 
   def start_link(options \\ []) do
-      GenServer.start_link(__MODULE__, :ok, options ++ [name: Main])
+      GenServer.start_link(__MODULE__, :ok, options ++ [name: FastShoppingList])
   end
 
   def init(:ok) do

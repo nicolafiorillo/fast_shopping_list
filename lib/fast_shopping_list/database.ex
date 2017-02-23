@@ -8,7 +8,7 @@ defmodule FastShoppingList.Database do
   require Logger
 
   def start_link(options \\ []) do
-      GenServer.start_link(__MODULE__, :ok, options ++ [name: Database])
+      GenServer.start_link(__MODULE__, :ok, options ++ [name: FastShoppingList.Database])
   end
 
   def init(:ok) do
@@ -16,14 +16,36 @@ defmodule FastShoppingList.Database do
   end
 
   def load() do
-    GenServer.cast(Database, :load)
+    GenServer.cast(FastShoppingList.Database, :load)
   end
 
-  def handle_cast(:load, state) do
+  def search_start(string) when is_bitstring(string) do
+    GenServer.call(FastShoppingList.Database, {:search_start, string})
+  end
+
+  def search_contains(string) when is_bitstring(string) do
+    GenServer.call(FastShoppingList.Database, {:search_contains, string})
+  end
+
+  def handle_cast(:load, _state) do
     {:noreply, load_data()}
   end
 
-  defp load_data do
+  def handle_call({:search_start, string}, _from, database) do
+    res = Enum.filter(database, fn {name, foods} ->
+      String.starts_with?(name, string)
+    end)
+    {:reply, res, database}
+  end
+
+  def handle_call({:search_contains, string}, _from, database) do
+    res = Enum.filter(database, fn {name, foods} ->
+      String.contains?(name, string)
+    end)
+    {:reply, res, database}
+  end
+
+  defp load_data() do
     file_name = Application.get_env(:fast_shopping_list, :foods_db)
     Logger.info("Reading database: #{file_name}")
 
@@ -45,6 +67,8 @@ defmodule FastShoppingList.Database do
         end)
 
       Logger.info("Data ready: #{length(Map.keys(foods))} foods.")
+
+      foods
     end)
   end
 end
