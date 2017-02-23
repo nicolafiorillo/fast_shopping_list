@@ -32,14 +32,14 @@ defmodule FastShoppingList.Database do
   end
 
   def handle_call({:search_start, string}, _from, database) do
-    res = Enum.filter(database, fn {name, foods} ->
+    res = Enum.filter(database, fn {name, _foods} ->
       String.starts_with?(name, string)
     end)
     {:reply, res, database}
   end
 
   def handle_call({:search_contains, string}, _from, database) do
-    res = Enum.filter(database, fn {name, foods} ->
+    res = Enum.filter(database, fn {name, _foods} ->
       String.contains?(name, string)
     end)
     {:reply, res, database}

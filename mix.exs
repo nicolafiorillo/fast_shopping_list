@@ -30,7 +30,9 @@ defmodule FastShoppingList.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:sqlitex, "~> 1.2"}
+      {:sqlitex, "~> 1.2"},
+      {:cowboy, "~> 1.1"},
+      {:plug, "~> 1.3"}
     ]
   end
 end

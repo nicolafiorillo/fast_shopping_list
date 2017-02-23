@@ -10,7 +10,7 @@ defmodule FastShoppingList.Application do
 
     # Define workers and child supervisors to be supervised
     children = [
-      # Starts a worker by calling: FastShoppingList.Worker.start_link(arg1, arg2, arg3)
+      Plug.Adapters.Cowboy.child_spec(:http, FastShoppingList.Router, [], [port: 4001]),
       worker(FastShoppingList.Database, []),
       worker(FastShoppingList, [])
     ]
