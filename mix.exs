@@ -32,7 +32,8 @@ defmodule FastShoppingList.Mixfile do
     [
       {:sqlitex, "~> 1.2"},
       {:cowboy, "~> 1.1"},
-      {:plug, "~> 1.3"}
+      {:plug, "~> 1.3"},
+      {:poison, "~> 3.0"}
     ]
   end
 end
